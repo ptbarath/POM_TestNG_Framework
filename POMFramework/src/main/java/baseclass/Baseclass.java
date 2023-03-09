@@ -14,6 +14,8 @@ import org.openqa.selenium.firefox.FirefoxDriver;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.BeforeTest;
+import org.testng.annotations.Optional;
+import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 
 import io.github.bonigarcia.wdm.WebDriverManager;
@@ -24,11 +26,12 @@ public class Baseclass {
 	
 	
 	@BeforeSuite
-	public void initializeDriver() throws IOException{
+	@Parameters("url")
+	public void initializeDriver(@Optional String url) throws IOException{
 		Properties prop= new Properties();
 		FileInputStream file= new FileInputStream("D:\\Selenium\\Selenium Projects\\POMFramework\\src\\main\\java\\data.properties");
 		prop.load(file);
-		String browsername = prop.getProperty("browser");
+		String browsername =prop.getProperty("browser");
 		
 		
 		
@@ -54,7 +57,7 @@ public class Baseclass {
 		
 		driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
 		driver.manage().window().maximize();
-		driver.get("https://www.demoblaze.com/");
+		driver.get(url);
 	}
 	
 	
