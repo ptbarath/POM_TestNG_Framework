@@ -35,16 +35,33 @@ public class LoginPage extends Baseclass {
 	
 	@FindBy (xpath="//button[@onclick='logIn()']")
 	private WebElement Loginsubmitbutton;
+	
+	@FindBy (xpath="//a[text()='Welcome Barath']")
+	private WebElement NameoftheUser;
 
 		
 	
-	public void login(String username, String password) throws InterruptedException  {
+	public String login(String username, String password) throws InterruptedException  {
 		Loginbutton.click();
-		Thread.sleep(3000);
-		loginusername.sendKeys(username);
-		loginpassword.sendKeys(password);
-		Loginsubmitbutton.click();
+		log.info("Click don Login button");
 		
+		Thread.sleep(2000);
+		loginusername.sendKeys(username);
+		log.info("Entered Username");
+		
+		loginpassword.sendKeys(password);
+		log.info("Entered Password");
+		
+		Loginsubmitbutton.click();
+		log.info("Clicked on Submit button");
+		Thread.sleep(5000);
+		
+	
+		String Name=NameoftheUser.getText();		
+		
+		return Name;
 	}
+	
+
 	
 }
